@@ -23,7 +23,9 @@ from groq import (
 from pydantic import BaseModel, Field, field_validator
 from pypdf import PdfReader
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+TASK_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = TASK_ROOT.parent
+load_dotenv(TASK_ROOT / ".env")
 load_dotenv(PROJECT_ROOT / ".env")
 
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
@@ -36,7 +38,7 @@ TOP_K = int(os.getenv("TOP_K", "4"))
 MAX_COSINE_DISTANCE = float(os.getenv("MAX_COSINE_DISTANCE", "0.95"))
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 
-chroma = chromadb.PersistentClient(path=str(PROJECT_ROOT / "backend" / ".chroma"))
+chroma = chromadb.PersistentClient(path=str(TASK_ROOT / "backend" / ".chroma"))
 collection_lock = RLock()
 
 app = FastAPI(title="PDF Knowledge Chat", version="1.0.0")

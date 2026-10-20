@@ -1,9 +1,12 @@
 .env
+**/.env
+!.env.example
+!**/.env.example
 .venv/
+**/.venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
 node_modules/
 dist/
-backend/.chroma/
-backend/.venv/
+task-1/backend/.chroma/
